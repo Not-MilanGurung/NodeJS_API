@@ -6,7 +6,7 @@ Create a file `.env` in the root folder with
 ```env
 PORT= // Port for server
 MONGODB_URI= //Uri of the mongodb server database
-JWT_SECRET= //JWT secrect key (not yet implemented, for future use)
+JWT_SECRET= //JWT secrect key 
 JWT_EXPIRATION= //Life time of JWT
 ```
 Run with nodemon using `npm run dev`

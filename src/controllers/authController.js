@@ -54,7 +54,7 @@ const login = async (req, res) => {
             return res.status(400).json({ error: "Invalid email or password"});
         }
 
-        const token = jwt.sign({ id: user._id }, config.JWT_SECRET, {
+        const token = jwt.sign({ userId: user._id }, config.JWT_SECRET, {
             expiresIn: config.JWT_EXPIRATION,
         });
 
@@ -86,8 +86,9 @@ const getAllUsers = async (req, res) => {
 // controller functions to delete a user by ID (optional enhancement) --- IGNORE ---
 const deleteUser = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const user = await User.findByIdAndDelete(userId);
+    const { id } = req.params;
+    
+    const user = await User.findByIdAndDelete(id);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
