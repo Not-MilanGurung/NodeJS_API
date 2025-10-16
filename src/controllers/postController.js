@@ -1,4 +1,5 @@
 const Post = require('../models/postModel');
+const validObjectId = require('mongoose').Types.ObjectId.isValid;
 
 const createPost = async (req, res) => {
     try {
@@ -39,7 +40,7 @@ const updatePost = async (req, res) => {
             return res.status(404).json({ error: 'Post not found' });
         }
 
-        if (post.author.equals(id)) {
+        if (!post.author.equals(userId)) {
             return res.status(401).json({ error: 'Only the author can update the post'});
         }
 
@@ -50,7 +51,7 @@ const updatePost = async (req, res) => {
             post.content = content;
         }
 
-        post.save();
+        await post.save();
 
         return res.status(200).json({ message: 'Post updated successfully', post});
     }
@@ -61,15 +62,55 @@ const updatePost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { id } = req.params;
 
+        const post = await Post.findById(id);
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        if (!post.author.equals(userId)) {
+            return res.status(401).json({ error: 'Only the author can delete the post'});
+        }
+
+        await post.deleteOne();
+
+        return res.status(200).json({ message: 'Post deleted succesfully' });
+    }
+    catch (error) {
+        console.error("Error deleteing post:", error);
+        res.status(500).json({ error: "Server error. Please try again later." });
+    }
 };
 
 const getAllPosts = async (req, res) => {
-
+    try {
+        const posts = await Post.find();
+        return res.status(200).json({ posts });
+    }
+    catch (error) {
+        console.error("Error while getting all posts:",error);
+        res.status(500).json({ error: "Server error. Please try again later." });
+    }
 };
 
 const getPostById = async (req, res) => {
+    try {
+        const { id } = req.params;
 
+        const post = await Post.findById(id);
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        return res.status(200).json({ post });
+    }
+    catch (error) {
+        console.error("Error fetching a post:", error);
+        res.status(500).json({ error: "Server error. Please try again later." });
+    }
 };
 
 module.exports = { createPost, updatePost, deletePost, getAllPosts, getPostById };
