@@ -60,5 +60,4 @@ router.put("/:id", verifyToken, validBsonId, updatePost);
  */
 router.delete("/:id", verifyToken, validBsonId, deletePost);
 
-
 module.exports = router;
