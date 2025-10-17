@@ -12,7 +12,7 @@ const router = express.Router();
  * @method POST
  * @body { title, content }
  * @header { Authorisation: token }
- * @returns {message, postId}
+ * @returns {message, post}
  * @returns { error }
  */
 router.post("/", verifyToken, createPost);
@@ -59,6 +59,5 @@ router.put("/:id", verifyToken, validBsonId, updatePost);
  * @returns { error }
  */
 router.delete("/:id", verifyToken, validBsonId, deletePost);
-
 
 module.exports = router;

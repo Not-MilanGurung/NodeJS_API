@@ -17,7 +17,7 @@ const createPost = async (req, res) => {
         });
 
         await post.save();
-        res.status(201).json({ message: "Post created succesfully", postId: post._id });
+        res.status(201).json({ message: "Post created succesfully", post });
     }
     catch (error) {
         console.error("Error creating post:", error);
