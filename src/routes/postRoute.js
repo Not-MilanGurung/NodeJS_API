@@ -12,7 +12,7 @@ const router = express.Router();
  * @method POST
  * @body { title, content }
  * @header { Authorisation: token }
- * @returns {message, postId}
+ * @returns {message, post}
  * @returns { error }
  */
 router.post("/", verifyToken, createPost);

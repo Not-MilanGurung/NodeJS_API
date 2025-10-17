@@ -18,7 +18,7 @@
 								"exec": [
 									"const response = pm.response.json();",
 									"",
-									"pm.collectionVariables.set(\"postId\", response.postId);"
+									"pm.collectionVariables.set(\"postId\", response.post._id);"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Test post 2\",\n    \"content\": \"THis is an example post created by example user\"\n}",
+							"raw": "{\n    \"title\": \"Milan's Post\",\n    \"content\": \"This is milan's post\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,7 +80,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "68ee60ac580bf09092b5525a"
+									"value": "{{postId}}"
 								}
 							]
 						}
@@ -110,7 +110,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "68ee60ac580bf09092b5525a"
+									"value": "{{postId}}"
 								}
 							]
 						}
@@ -169,7 +169,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "68f0fc8a9dc9f2b49d7bcd10"
+									"value": "{{postId}}"
 								}
 							]
 						}
@@ -227,7 +227,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"content\" : \"This is a comment\"\n}",
+							"raw": "{\n    \"content\" : \"This is Milan's Comment\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -275,7 +275,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"content\": \"Updated comment\"\n}",
+							"raw": "{\n    \"content\": \"This is milan's updated comment\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -304,7 +304,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Delete Comment",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -367,7 +367,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\" : \"example\",\n    \"email\" : \"example@example.com\",\n    \"password\" : \"example password\"\n}",
+							"raw": "{\n    \"username\" : \"Milan gurung\",\n    \"email\" : \"Milan@example.com\",\n    \"password\" : \"Password$$$$$5\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -413,7 +413,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\" : \"example@example.com\",\n    \"password\" : \"example password\"\n}",
+							"raw": "{\n    \"email\" : \"Milan@example.com\",\n    \"password\" : \"Password$$$$$5\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -485,6 +485,33 @@
 								{
 									"key": "id",
 									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/auth/users/:id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68f23dd6a8051273d5166dd2"
 								}
 							]
 						}

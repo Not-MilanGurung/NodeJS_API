@@ -98,5 +98,23 @@ const deleteUser = async (req, res) => {
     res.status(500).json({ error: "Server error. Please try again later." });
   }
 };
+
+const getUser = async (req, res) => {
+  try {
+    // const userId = req.userId;
+    const { id } = req.params;
+
+    const user = await User.findById(id).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // if (user._id.equals())
+    return res.status(200).json({ user });
+  }catch (error) {
+    console.error("Error fetching a user:", error);
+    res.status(500).json({ error: "Server error. Please try again later." });
+  }
+}
 // export the controller functions
-module.exports = { register, login, getAllUsers, deleteUser };
+module.exports = { register, login, getAllUsers, deleteUser, getUser };
